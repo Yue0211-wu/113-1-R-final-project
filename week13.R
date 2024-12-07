@@ -9,6 +9,15 @@ glimpse(taipei_agencies)
 taipei_agencies |>
   dplyr::count(`評鑑等級`, name = "數量")
 
+# 替換所有以 "１０６" 開頭的機構地址
+taipei_agencies <- taipei_agencies |>
+  dplyr::mutate(
+    `機構地址` = stringr::str_replace_all(`機構地址`, "^１０６", "")
+  )
+
+# 查看所有唯一的 "機構地址"
+unique(taipei_agencies$`機構地址`)
+
 # 提取 "機構地址" 中的區名稱
 taipei_agencies |>
   dplyr::mutate(
